@@ -4,6 +4,10 @@ namespace Sid\Cron;
 
 class Factory
 {
+    /**
+     * @param array $array
+     * @return \Sid\Cron\Manager
+     */
     public static function buildFromArray(array $array) : Manager
     {
         $manager = new Manager();

@@ -11,25 +11,32 @@ class Manager implements ManagerInterface
      */
     protected $jobs = [];
 
-
-
-    public function add(JobInterface $job)
+    /**
+     * @param \Sid\Cron\JobInterface $job
+     * @return void
+     */
+    public function add(JobInterface $job): void
     {
         $this->jobs[] = $job;
     }
 
+    /**
+     * @param \DateTime|null $now
+     * @return array
+     */
     public function getDueJobs(DateTime $now = null) : array
     {
-        $jobs = array_filter(
+        return array_filter(
             $this->jobs,
             function ($job) use ($now) {
                 return $job->isDue($now);
             }
         );
-
-        return $jobs;
     }
 
+    /**
+     * @return array
+     */
     public function getAllJobs() : array
     {
         return $this->jobs;

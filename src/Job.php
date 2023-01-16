@@ -10,26 +10,26 @@ class Job implements JobInterface
     /**
      * @var string
      */
-    protected $expression;
+    protected string $expression;
 
     /**
      * @var mixed
      */
-    protected $data;
-
-
+    protected mixed $data;
 
     /**
+     * @param string $expression
      * @param mixed $data
      */
-    public function __construct(string $expression, $data)
+    public function __construct(string $expression, mixed $data)
     {
         $this->expression = $expression;
         $this->data       = $data;
     }
 
-
-
+    /**
+     * @return string
+     */
     public function getExpression() : string
     {
         return $this->expression;
@@ -43,8 +43,10 @@ class Job implements JobInterface
         return $this->data;
     }
 
-
-
+    /**
+     * @param \DateTime|null $datetime
+     * @return bool
+     */
     public function isDue(DateTime $datetime = null) : bool
     {
         $cronExpression = CronExpression::factory(
